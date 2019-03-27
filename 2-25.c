@@ -1,0 +1,41 @@
+Status ListMergeOppose_L(LinkList &A,LinkList &B,LinkList &C)
+{
+	LinkList pa,pb,qa,qb;
+	pa=A;
+	pb=B;
+	qa=pa;
+	qb=pb;
+	pa=pa->next;
+	pb=pb->next;
+	A->next=NULL;
+	C=A;
+	while(pa&&pb){
+		if(pa->data<pb->data){
+			qa=pa;
+			pa=pa->next;
+			qa->next=A->next;
+			A->next=qa;
+		}
+		else{
+			qb=pb;
+			pb=pb->next;
+			qb->next=A->next;
+			A->next=qb;
+		}
+	}
+	while(pa){
+		qa=pa;
+		pa=pa->next;
+		qa->next=A->next;
+		A->next=qa;
+	}
+	while(pb){
+		qb=pb;
+		pb=pb->next;
+		qb->next=A->next;
+		A->next=qb;
+	}
+	pb=B;
+	free(pb);
+	return OK;
+}
